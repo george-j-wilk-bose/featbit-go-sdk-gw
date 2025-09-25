@@ -532,6 +532,27 @@ func (client *FBClient) AllLatestFlagsVariations(user FBUser) (AllFlagState, err
 	return ret, nil
 }
 
+// GetAllFlagMetadata function returns metadata for all flags in current environment
+// Feature Flag metadata contains flag identifiers (Name, Key etc.) as well as state info (Deleted, Archived etc.)
+func (client *FBClient) GetAllFlagMetadata() ([]FeatureFlagMetadata, error) {
+	var featureList []FeatureFlagMetadata
+	items, err := client.dataStorage.GetAll(data.Features)
+	if err != nil {
+
+		return featureList, err
+	}
+	for _, item := range items {
+		if flag, ok := item.(*data.FeatureFlag); ok {
+			featureList = append(featureList, flag.ToFeatureFlagMetadata())
+		} else if reflect.TypeOf(item) == nil {
+			log.LogWarn("FB GO SDK: nil feature flag found in data storage, maybe caused by deletion")
+		} else {
+			log.LogError("FB GO SDK: feature flag has a wrong type in data storage: %v", reflect.TypeOf(item))
+		}
+	}
+	return featureList, nil
+}
+
 // InitializeFromExternalJson initializes FeatBit client in the offline mode
 //
 // Return false if the json can't be parsed or client is not in the offline mode
