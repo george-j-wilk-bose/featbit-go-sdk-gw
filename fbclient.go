@@ -533,14 +533,14 @@ func (client *FBClient) AllLatestFlagsVariations(user FBUser) (AllFlagState, err
 }
 
 // GetAllFlagMetadata function returns metadata for all flags in current environment
-// Feature Flag metadata contains flag identifiers (Name, Key etc.) as well as state info (Deleted, Archived etc.)
+// Feature Flag metadata contains flag identifiers (Name, Key etc.) as well as state info (Deleted, Enabled etc.)
 func (client *FBClient) GetAllFlagMetadata() ([]FeatureFlagMetadata, error) {
 	var featureList []FeatureFlagMetadata
 	items, err := client.dataStorage.GetAll(data.Features)
 	if err != nil {
-
 		return featureList, err
 	}
+	
 	for _, item := range items {
 		if flag, ok := item.(*data.FeatureFlag); ok {
 			featureList = append(featureList, flag.ToFeatureFlagMetadata())
