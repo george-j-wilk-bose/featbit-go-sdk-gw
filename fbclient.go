@@ -3,6 +3,10 @@ package featbit
 import (
 	"encoding/json"
 	"fmt"
+	"reflect"
+	"sync"
+	"time"
+
 	"github.com/featbit/featbit-go-sdk/factories"
 	. "github.com/featbit/featbit-go-sdk/interfaces"
 	"github.com/featbit/featbit-go-sdk/internal"
@@ -12,9 +16,6 @@ import (
 	"github.com/featbit/featbit-go-sdk/internal/types/insight"
 	"github.com/featbit/featbit-go-sdk/internal/util"
 	"github.com/featbit/featbit-go-sdk/internal/util/log"
-	"reflect"
-	"sync"
-	"time"
 )
 
 type FBClient struct {
