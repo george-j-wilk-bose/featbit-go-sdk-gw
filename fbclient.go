@@ -546,10 +546,10 @@ func (client *FBClient) GetAllFlagMetadata() ([]FeatureFlagMetadata, error) {
 	for _, item := range items {
 		if flag, ok := item.(*data.FeatureFlag); ok {
 			featureList = append(featureList, flag.ToFeatureFlagMetadata())
-		} else if reflect.TypeOf(item) == nil {
+		} else if item == nil {
 			log.LogWarn("FB GO SDK: nil feature flag found in data storage, maybe caused by deletion")
 		} else {
-			log.LogError("FB GO SDK: feature flag has a wrong type in data storage: %v", reflect.TypeOf(item))
+			log.LogError("FB GO SDK: feature flag has a wrong type in data storage: %v, value: %v", reflect.TypeOf(item), item)
 		}
 	}
 	return featureList, nil
