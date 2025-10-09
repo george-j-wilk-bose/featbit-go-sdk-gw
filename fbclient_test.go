@@ -3,6 +3,9 @@ package featbit
 import (
 	"encoding/base64"
 	"encoding/json"
+	"testing"
+	"time"
+
 	"github.com/featbit/featbit-go-sdk/factories"
 	"github.com/featbit/featbit-go-sdk/fixtures"
 	"github.com/featbit/featbit-go-sdk/interfaces"
@@ -12,8 +15,6 @@ import (
 	"github.com/featbit/featbit-go-sdk/internal/types/insight"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
-	"time"
 )
 
 type Dummy struct {
