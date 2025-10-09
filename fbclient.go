@@ -536,6 +536,7 @@ func (client *FBClient) AllLatestFlagsVariations(user FBUser) (AllFlagState, err
 
 // GetAllFlagMetadata function returns metadata for all flags in current environment
 // Feature Flag metadata contains flag identifiers (Name, Key etc.) as well as state info (Deleted, Enabled etc.)
+// Note that tags data are only available in featbit v5.1.1 and later
 func (client *FBClient) GetAllFlagMetadata() ([]FeatureFlagMetadata, error) {
 	var featureList []FeatureFlagMetadata
 	items, err := client.dataStorage.GetAll(data.Features)
